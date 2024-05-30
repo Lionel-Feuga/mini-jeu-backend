@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-sequelize.sync().then(async() => {
+sequelize.sync({ force: true }).then(async () => {
   await seedDatabase();
   app.listen(3000, () => {
     console.log('Server is running on port 3000');

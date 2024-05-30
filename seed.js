@@ -8,6 +8,24 @@ async function seedDatabase() {
   const weaponCount = await Weapon.count();
   const armorCount = await Armor.count();
 
+  if (weaponCount === 0) {
+    await Weapon.bulkCreate([
+      { name: 'Épée de Fer', damageBonus: 8 },
+      { name: 'Bâton de Disciple', damageBonus: 4 },
+      { name: 'Arc de Chasseur', damageBonus: 7 },
+      { name: 'Dagues de Fer', damageBonus: 10 },
+    ]);
+  }
+
+  if (armorCount === 0) {
+    await Armor.bulkCreate([
+      { name: 'Armure Simple', defenseBonus: 5 },
+      { name: 'Robe en Tissu', defenseBonus: 2 },
+      { name: 'Armure Légère', defenseBonus: 3 },
+      { name: 'Armure de Cuir', defenseBonus: 4 },
+    ]);
+  }
+
   if (characterCount === 0) {
     await Character.bulkCreate([
       {
@@ -39,7 +57,8 @@ async function seedDatabase() {
         imageUrl: 'mageInGame-noBg.png',
         weaponId: 2,
         armorId: 2
-      },{
+      },
+      {
         name: 'Archer',
         health: 90,
         mana: 20,
@@ -53,7 +72,8 @@ async function seedDatabase() {
         imageUrl: 'archerInGame-noBg.png',
         weaponId: 3,
         armorId: 3
-      },{
+      },
+      {
         name: 'Assassin',
         health: 85,
         mana: 30,
@@ -64,63 +84,64 @@ async function seedDatabase() {
         experience: 0,
         experienceToNextLevel: 100,
         gold: 100,
-        imageUrl: 'warriorInGame-noBg.png',
+        imageUrl: 'assassinInGame-noBg.png',
         weaponId: 4,
         armorId: 4
       },
     ]);
   }
 
+  // Only create abilities after characters are created to ensure foreign keys are valid
   if (abilityCount === 0) {
     await Ability.bulkCreate([
-        {
-            characterId: 1,
-            name: "Attaque à l'épée",
-            description: "Inflige des dégâts en fonction de la force.",
-            manaCost: null
-          },
-          {
-            characterId: 1,
-            name: "Renforcement",
-            description: "Augmente les dégâts infligés de 30% pour les deux prochains coups.",
-            manaCost: 10
-          },
-          {
-            characterId: 2,
-            name: "Attaque au bâton",
-            description: "Inflige des dégâts en fonction de la force.",
-            manaCost: null
-          },
-          {
-            characterId: 2,
-            name: "Boule de feu",
-            description: "Inflige des dégâts en fonction de l'intelligence.",
-            manaCost: 25
-          },
-          {
-            characterId: 3,
-            name: "Tir à l'arc",
-            description: "Inflige des dégâts en fonction de l'agilité.",
-            manaCost: null
-          },
-          {
-            characterId: 3,
-            name: "Oeil perçant",
-            description: "Augmente les chances de coups critiques pendant 5 tours.",
-            manaCost: null
-          },
-          {
-            characterId: 4,
-            name: "Coup de dague",
-            description: "Inflige des dégâts en fonction de la force.",
-            manaCost: null
-          },
-          {
-            characterId: 4,
-            name: "Poison",
-            description: "Empoisonne l'ennemi, infligeant des dégâts sur la durée.",
-            manaCost: null
-          }
+      {
+        characterId: 1,
+        name: "Attaque à l'épée",
+        description: "Inflige des dégâts en fonction de la force.",
+        manaCost: 0
+      },
+      {
+        characterId: 1,
+        name: "Renforcement",
+        description: "Augmente les dégâts infligés de 30% pour les deux prochains coups.",
+        manaCost: 10
+      },
+      {
+        characterId: 2,
+        name: "Attaque au bâton",
+        description: "Inflige des dégâts en fonction de la force.",
+        manaCost: 0
+      },
+      {
+        characterId: 2,
+        name: "Boule de feu",
+        description: "Inflige des dégâts en fonction de l'intelligence.",
+        manaCost: 25
+      },
+      {
+        characterId: 3,
+        name: "Tir à l'arc",
+        description: "Inflige des dégâts en fonction de l'agilité.",
+        manaCost: 0
+      },
+      {
+        characterId: 3,
+        name: "Oeil perçant",
+        description: "Augmente les chances de coups critiques pendant 5 tours.",
+        manaCost: 0
+      },
+      {
+        characterId: 4,
+        name: "Coup de dague",
+        description: "Inflige des dégâts en fonction de la force.",
+        manaCost: 0
+      },
+      {
+        characterId: 4,
+        name: "Poison",
+        description: "Empoisonne l'ennemi, infligeant des dégâts sur la durée.",
+        manaCost: 0
+      }
     ]);
   }
 
@@ -144,52 +165,10 @@ async function seedDatabase() {
   if (inventoryCount === 0) {
     await Inventory.bulkCreate([
       {
-        characterId: 5,
-        weaponId: 2,
-        armorId: 5,
+        characterId: 1,
+        weaponId: 1,
+        armorId: 1,
         gold: 130
-      },
-    ]);
-  }
-
-  if (weaponCount === 0) {
-    await Weapon.bulkCreate([
-      {
-        name: 'Épée de Fer',
-        damageBonus: 8
-      },
-      {
-        name: 'Bâton de Disciple',
-        damageBonus: 4
-      },
-      {
-        name: 'Arc de Chasseur',
-        damageBonus: 7
-      },
-      {
-        name: 'Dagues de Fer',
-        damageBonus: 10
-      },
-    ]);
-  }
-
-  if (armorCount === 0) {
-    await Armor.bulkCreate([
-      {
-        name: 'Armure Simple',
-        defenseBonus: 5
-      },
-      {
-        name: 'Robe en Tissu',
-        defenseBonus: 2
-      },
-      {
-        name: 'Armure Légère',
-        defenseBonus: 3
-      },
-      {
-        name: 'Armure de Cuir',
-        defenseBonus: 4
       },
     ]);
   }
