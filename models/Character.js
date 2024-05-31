@@ -46,6 +46,10 @@ const Character = sequelize.define('Character', {
     type: DataTypes.STRING,
     allowNull: true
   },
+  profileImageUrl: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   weaponId: {
     type: DataTypes.INTEGER,
     allowNull: true
