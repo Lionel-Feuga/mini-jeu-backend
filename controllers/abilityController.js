@@ -22,6 +22,16 @@ module.exports = function (app) {
     }
   });
 
+  app.get("/v1/characters/:characterId/abilities", async function (req, res) {
+    try {
+      const abilities = await Ability.findAll({ where: { characterId: req.params.characterId } });
+      res.json({ data: abilities, error: null });
+    } catch (err) {
+      console.error('Error fetching abilities for character:', err);
+      res.status(500).json({ error: "internal_server_error" });
+    }
+  });
+
   app.post("/v1/abilities", async function (req, res) {
     try {
       const ability = await Ability.create(req.body);
