@@ -32,8 +32,8 @@ async function seedDatabase() {
         name: 'Guerrier',
         health: 100,
         mana: 30,
-        strength: 20,
-        agility: 15,
+        strength: 19,
+        agility: 10,
         intelligence: 5,
         level: 1,
         experience: 0,
@@ -62,8 +62,8 @@ async function seedDatabase() {
         name: 'Archer',
         health: 90,
         mana: 20,
-        strength: 13,
-        agility: 17,
+        strength: 10,
+        agility: 20,
         intelligence: 5,
         level: 1,
         experience: 0,
@@ -104,6 +104,11 @@ async function seedDatabase() {
         characterId: 1,
         name: "Renforcement",
         description: "Augmente les dégâts infligés de 30% pour les deux prochains coups.",
+        manaCost: 10
+      },{
+        characterId: 1,
+        name: "Frappe de bouclier",
+        description: "Étourdit l'ennemie en infligeant des dégâts amoindris",
         manaCost: 10
       },
       {
@@ -151,13 +156,13 @@ async function seedDatabase() {
         name: 'Jeune Gobelin',
         health: 50,
         strength: 10,
-        imageUrl: 'goblin-noBp.png'
+        imageUrl: 'gobelin-noBp.png'
       },
       {
         name: 'Gobelin Adulte',
         health: 75,
-        strength: 20,
-        imageUrl: 'goblinAdult-noBg.png'
+        strength: 15,
+        imageUrl: 'gobelinAdult-noBg.png'
       },
     ]);
   }

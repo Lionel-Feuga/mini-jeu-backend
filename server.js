@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { sequelize } = require('./models');
+const sequelize = require('./db'); // Corrigé pour pointer vers le bon fichier
 const characterRoutes = require('./routes/characterRoutes');
 const abilityRoutes = require('./routes/abilityRoutes');
 const armorRoutes = require('./routes/armorRoutes');
@@ -24,10 +24,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+const PORT = process.env.PORT || 3000;
+
 sequelize.sync({ force: true }).then(async () => {
   await seedDatabase();
-  app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
   });
 }).catch(err => {
   console.error('Unable to connect to the database:', err);
